@@ -44,14 +44,4 @@ void viewRecipes();
 //add recipe function
 void addRecipe();
 
-
-bool cmpRecipeByName(Recipe, Recipe);
-bool cmpRecipeByCalories(Recipe, Recipe);
-bool cmpRecipeBySteps(Recipe, Recipe);
-bool cmpRecipeByIngredients(Recipe, Recipe);
-
-void viewRecipesByTime(vector<Recipe>&);
-void viewRecipesByName(vector<Recipe>&);
-void viewRecipesByCalories(vector<Recipe>&);
-void viewRecipesBySteps(vector<Recipe>&);
-void viewRecipesByIngredients(vector<Recipe>&);
+void save(int);
