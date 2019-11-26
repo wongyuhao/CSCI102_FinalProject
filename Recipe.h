@@ -9,8 +9,8 @@ class Recipe {
 private:
 	//object variables
 	string name;
-	vector <string> ingredients;
-	vector <string> steps;
+	vector<string> ingredients;
+	vector<string> steps;
 	int calories;
 
 public:
@@ -29,6 +29,8 @@ public:
 	int getCalories();
 	int getNumIngredients();
 	int getNumSteps();
+	vector<string>& getIngredients();
+	vector<string>& getSteps();
 
 	//print functions
 	void printRecipe();
@@ -44,7 +46,11 @@ void viewRecipes();
 //add recipe function
 void addRecipe();
 
+//save and load functions
+void save();
+void load();
 
+//add recipe helper functions
 bool cmpRecipeByName(Recipe, Recipe);
 bool cmpRecipeByCalories(Recipe, Recipe);
 bool cmpRecipeBySteps(Recipe, Recipe);
