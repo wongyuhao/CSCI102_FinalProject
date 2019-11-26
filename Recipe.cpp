@@ -73,6 +73,7 @@ void Recipe::printRecipe() {
 
 //view recipe menu function
 void viewRecipes() {
+	//if there is no recipe, prompt the user to return to main menu
 	if (recipeVector.empty()) {
 		cout << "No recipes found.\n\n";
 		cout << "Select an option:\n"
@@ -87,7 +88,8 @@ void viewRecipes() {
 		cout << '\n';
 		return;
 	}
-
+	
+	//print options to sort the recipes
 	cout << "Sort recipes by:\n"
 		<< "[1] Time entered\n"
 		<< "[2] Name\n"
@@ -97,13 +99,14 @@ void viewRecipes() {
 		<< "[0] Back\n\n";
 
 	cout << "Please enter the number beside your selection:\n";
-
+	
 	int selection;
 	cin >> selection;
 	cout << '\n';
 
 	validate(selection, 0, 5);
-
+	
+	//create a copy of the original vector,  sort it according to the user's selection and print it
 	vector<Recipe> recipeVectorSorted = recipeVector;
 
 	switch (selection)
@@ -135,7 +138,8 @@ void viewRecipes() {
 		cerr << "Unexpected error in recipe_definitions.cpp: viewRecipes(): printing sorted recipe list\n";
 		return;
 	}
-
+	
+	//prompt the user to view a recipe in detail or return to main menu
 	cout << "Select an option:\n"
 		<< "[1-" << recipeVectorSorted.size() << "] View selected recipe\n"
 		<< "[0] Main menu\n\n";
@@ -149,8 +153,11 @@ void viewRecipes() {
 		cout << '\n';
 		return;
 	}
+	
+	//print the selected recipe
 	recipeVectorSorted[selection - 1].printRecipe();
 
+	//prompt the user to return to main menu (continue)
 	cout << "Select an option:\n"
 		<< "[0] Continue\n\n";
 		
@@ -234,6 +241,7 @@ void addRecipe() {
 		string temp_step;
 		int temp_calories;
 
+		//enter details of the recipe
 		cout << "Enter name: ";
 		cin.ignore();
 		getline(cin, temp_name);
@@ -266,6 +274,7 @@ void addRecipe() {
 			}
 		}
 
+		//add the recipe to recipeVector
 		Recipe temp_recipe(temp_name, temp_calories, temp_ingredients, temp_steps);
 		recipeVector.push_back(temp_recipe);
 
@@ -274,6 +283,7 @@ void addRecipe() {
 		char poll;
 		cin >> poll;
 
+		//prompt the user to either add another recipe or stop
 		while (tolower(poll) != 'y' && tolower(poll) != 'n') {
 			cout << "Invalid response.\n"
 				<< "Add another recipe? (Y/N)\n";
@@ -327,7 +337,8 @@ void save(){
 		vout.close();
 	}
 	
-	ofstream fout("data/save" + to_string(selection));
+	//overwrite the selected save file
+	ofstream fout("data/save" + to_string(selection), ios::trunc);
 	
 	fout << recipeVector.size() << '\n';
 	
@@ -392,10 +403,11 @@ void load(){
 	//clear recipeVector
 	recipeVector = {};
 	
-	int _size;
+	int _size;	//number of recipes
 	fin >> _size;
 	fin.ignore();
 	
+	//retrieve save file data
 	for(int i=0; i<_size; i++){
 		string temp_name;
 		int temp_calories;
