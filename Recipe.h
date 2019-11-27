@@ -14,6 +14,7 @@ private:
 	int calories;
 
 public:
+	//constructor
 	Recipe(string, int, vector<string>, vector<string>);
 
 	//member functions
